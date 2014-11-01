@@ -10,7 +10,7 @@ $func = isset($_GET['func']) ? $_GET['func'] : 'forward';
 
 if ($func == 'reverse') {
    date_default_timezone_set($_GET['zone']);
-   echo date("Y-m-d H:i:s T", $_GET['ts']);
+   echo date("Y-m-d H:i:s T", $_GET['ts']/1000);
 } else
 
 switch ($format) {
