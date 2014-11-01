@@ -6,6 +6,13 @@ function millis() {
 
 $format = isset($_GET['format']) ? $_GET['format'] : 'html';
 
+$func = isset($_GET['func']) ? $_GET['func'] : 'forward';
+
+if ($func == 'reverse') {
+   date_default_timezone_set($_GET['zone']);
+   echo date("Y-m-d H:i:s T", $_GET['ts']);
+} else
+
 switch ($format) {
 	case 'json':
 		echo '{"timestamp":"\/Date(' . millis() . '+0000)\/"}';
@@ -27,6 +34,13 @@ switch ($format) {
 		<ul><li><a href="?format=json">?format=json</a> for json.</li>
 			<li><a href="?format=plain">?format=plain</a> for plain.</li>
 			<li><a href="?format=xml">?format=xml</a> for xml.</li>
+                </ul>
+                <form method="GET">
+                   <input type="hidden" name="func" value="reverse"/>
+                   Timestamp: <input type="text" name="ts"/><br/>
+                   Timezone: <input type="text" name="zone"/><br/>
+                   <input type="submit"/>
+                </form>
 	    <?
 		}
 ?>
